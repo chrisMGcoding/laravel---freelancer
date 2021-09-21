@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\Portfolio;
+use Database\Factories\PortfolioFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
         $this->call([
-            TitreSeeder::class,
-            DescriptionSeeder::class
+            RoleSeeder::class,
+            AbouSeeder::class,
+            LocationSeeder::class,
+            ContactSeeder::class
         ]);
+
+        Portfolio::factory(9)->create();
     }
 }
