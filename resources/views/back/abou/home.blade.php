@@ -7,7 +7,9 @@
         <p>{{$item->id}}</p>
         <p style="text-align: center">{{$item->text1}}</p>
         <p>{{$item->text2}}</p>
-        <button class="btn-success"><a href="{{route("abou.edit", $item->id)}}">Edit</a></button>
+        @can('update', $abou)
+            <button class="btn-success"><a href="{{route("abou.edit", $item->id)}}">Edit</a></button>
+        @endcan
     </div>  
     @endforeach
 </div>

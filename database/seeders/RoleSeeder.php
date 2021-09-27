@@ -19,10 +19,10 @@ class RoleSeeder extends Seeder
                 'role' => 'administrateur'
             ],
             [
-                'role' => 'visiteur'
+                'role' => 'webmaster'
             ],
             [
-                'role' => 'collaborateur'
+                'role' => 'editeur'
             ]
         ]);
     }

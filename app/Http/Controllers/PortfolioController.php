@@ -18,7 +18,7 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::all();
         return view("back.portfolio.home", compact("portfolio"), [
-            "portfolio"=> DB::table('portfolios')->paginate(3)
+            "portfolio"=> DB::table('portfolios')->paginate(3),
         ]);
     }
 
@@ -40,6 +40,8 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("create", Portfolio::class);
+
         $portfolio = new Portfolio();
         $portfolio->name = $request->name;
         $portfolio->img = $request->file("img")->hashName();
@@ -80,6 +82,8 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, Portfolio $portfolio)
     {
+        $this->authorize("update", $portfolio);
+
         Storage::disk("public")->delete("img/" . $portfolio->img);
         $portfolio->name = $request->name;
         $portfolio->img = $request->file("img")->hashName();
@@ -98,6 +102,8 @@ class PortfolioController extends Controller
      */
     public function destroy(Portfolio $portfolio)
     {
+        $this->authorize("delete", $portfolio);
+
         Storage::disk('public')->delete("img/" .  $portfolio->img) ;
         $portfolio->delete();
         return redirect()->route("portfolio.index");

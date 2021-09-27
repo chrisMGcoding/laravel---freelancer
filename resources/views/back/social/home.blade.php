@@ -7,7 +7,9 @@
         <p>ID = {{$item->id}}</p>
         <p style="text-align: center">Nom du réseau : {{$item->name}}</p>
         <p>Lien du réseau : {{$item->url}}</p>
-        <button class="btn-success"><a href="{{route("contact.edit", $item->id)}}">Edit</a></button>
+        @can('update', $contact)
+            <button class="btn-success"><a href="{{route("contact.edit", $item->id)}}">Edit</a></button>
+        @endcan
     </div>  
     @endforeach
 </div>
